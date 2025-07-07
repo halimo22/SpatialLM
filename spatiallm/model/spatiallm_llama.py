@@ -206,19 +206,18 @@ class SpatialLMLlamaForCausalLM(LlamaForCausalLM):
                     cur_input_ids == self.config.point_end_token_id
                 )[0][0]
 
-                print(f"Debug - cur_input_embeds shape: {cur_input_embeds.shape}")
-                print(f"Debug - cur_input_embeds[:point_start_token_pos + 1] shape: {cur_input_embeds[: point_start_token_pos + 1].shape}")
-                print(f"Debug - cur_point_features shape: {cur_point_features.shape}")
-                print(f"Debug - cur_input_embeds[point_end_token_pos:] shape: {cur_input_embeds[point_end_token_pos:].shape}")
+                logger.info(f"Debug - cur_input_embeds shape: {cur_input_embeds.shape}")
+                logger.info(f"Debug - cur_input_embeds[:point_start_token_pos + 1] shape: {cur_input_embeds[: point_start_token_pos + 1].shape}")
+                logger.info(f"Debug - cur_point_features shape: {cur_point_features.shape}")
+                logger.info(f"Debug - cur_input_embeds[point_end_token_pos:] shape: {cur_input_embeds[point_end_token_pos:].shape}")
 
-                print(f"Debug - cur_input_embeds dimensions: {cur_input_embeds.dim()}")
-                print(f"Debug - cur_point_features dimensions: {cur_point_features.dim()}")
+                logger.info(f"Debug - cur_input_embeds dimensions: {cur_input_embeds.dim()}")
+                logger.info(f"Debug - cur_point_features dimensions: {cur_point_features.dim()}")
 
-                # Check if cur_point_features needs unsqueeze
                 if cur_point_features.dim() == 2 and cur_input_embeds.dim() == 3:
-                    print("Debug - cur_point_features is 2D, cur_input_embeds is 3D")
-                    print(f"Debug - cur_input_embeds last dim: {cur_input_embeds.shape[-1]}")
-                    print(f"Debug - cur_point_features last dim: {cur_point_features.shape[-1]}")
+                    logger.info("Debug - cur_point_features is 2D, cur_input_embeds is 3D")
+                    logger.info(f"Debug - cur_input_embeds last dim: {cur_input_embeds.shape[-1]}")
+                    logger.info(f"Debug - cur_point_features last dim: {cur_point_features.shape[-1]}")
 
                 cur_new_input_embeds = torch.cat(
                     (
